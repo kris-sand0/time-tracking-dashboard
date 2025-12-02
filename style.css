@@ -1,0 +1,242 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Primary */
+    --Purple-600: hsl(246, 80%, 60%);
+    --Orange-300-work: hsl(15, 100%, 70%);
+    --Blue-300-play: hsl(195, 74%, 62%);
+    --Pink-400-study: hsl(348, 100%, 68%);
+    --Green-400-exercise: hsl(145, 58%, 55%);
+    --Purple-700-social: hsl(264, 64%, 52%);
+    --Yellow-300-self-care: hsl(43, 84%, 65%);
+
+    /* Neutral */
+    --Navy-950: hsl(226, 43%, 10%);
+    --Navy-900: hsl(235, 46%, 20%);
+    --Purple-500: hsl(235, 45%, 61%);
+    --Navy-200: hsl(236, 100%, 87%);
+}
+
+body {
+    background-color: var(--Navy-950);
+    font-family: 'Rubik', sans-serif;
+    min-height: 100vh;
+    font-size: 18px;
+    display: grid;
+    place-content: center;
+}
+
+.small-text {
+    font-size: 12px;
+}
+
+.big-text {
+    font-size: 2.5rem;
+    font-weight: 300;
+}
+
+.bold-text {
+    font-weight: 500;
+}
+
+.current-hours {
+    margin: 1.25rem 0 .5rem;
+}
+
+.dashboard-container {
+    color: white;
+    max-width: 1000px;
+    margin: 1rem auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+.profile-card {
+    background-color: var(--Navy-900);
+    border-radius: .75rem;
+    overflow: hidden;
+}
+
+.profile-card .top {
+    background-color: var(--Purple-600);
+    color: var(--Purple-500);
+    padding: 1.5rem;
+    border-radius: 0 0 .75rem .75rem;
+}
+
+.profile-card .top .name {
+    color: white;
+    display: block;
+    margin-bottom: 0;
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+
+.profile-card .img {
+    width: 50px;
+    margin-bottom: 1rem;
+}
+
+.profile-card .bottom {
+    padding: 1.5rem;
+}
+
+.profile-card .bottom .time-list {
+    display: flex;
+    justify-content: space-between;
+    gap: .75rem;
+}
+
+.profile-card .bottom .time-list button {
+    cursor: pointer;
+    background: transparent;
+    color: var(--Purple-500);
+    font-size: 1.05rem;
+    border: 0;
+}
+
+.profile-card .bottom .time-list button.active {
+    color: white;
+}
+
+.profile-card .bottom .time-list button:hover {
+    color: white;
+}
+
+/* Card Styles */
+.card {
+    cursor: pointer;
+    border-radius: .75rem;
+    overflow: hidden;
+    display: grid;
+    padding-top: 2.5rem;
+    position: relative;
+}
+
+.card .card-top {
+    background-size: 60px;
+    background-repeat: no-repeat;
+    background-position: right 15px top -5px;
+    min-height: 2.25rem;
+    position: absolute;
+    top: 0;
+    right: 1rem;
+    height: 50px;
+    width: 100%;
+    z-index: 1;
+}
+
+.card .card-bottom {
+    background-color: var(--Navy-900);
+    border-radius: .75rem;
+    padding: 1.5rem;
+    transition: all 200ms ease;
+    position: relative;
+    z-index: 2;
+}
+
+.card .card-bottom:hover {
+    background-color: var(--Purple-500);
+}
+
+.card .card-bottom .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card .card-bottom .time {
+    margin-top: .5rem;
+}
+
+.card .card-bottom .time .previous-hours {
+    color: var(--Purple-500);
+}
+
+/* Card Background Images */
+.work-card {
+    background-color: var(--Orange-300-work);
+}
+
+.work-card .card-top {
+    background-image: url('images/icon-work.svg');
+}
+
+.play-card {
+    background-color: var(--Blue-300-play);
+}
+
+.play-card .card-top {
+    background-image: url('images/icon-play.svg');
+}
+
+.study-card {
+    background-color: var(--Pink-400-study);
+}
+
+.study-card .card-top {
+    background-image: url('images/icon-study.svg');
+}
+
+.exercise-card {
+    background-color: var(--Green-400-exercise);
+}
+
+.exercise-card .card-top {
+    background-image: url('images/icon-exercise.svg');
+}
+
+.social-card {
+    background-color: var(--Purple-700-social);
+}
+
+.social-card .card-top {
+    background-image: url('images/icon-social.svg');
+}
+
+.self-care-card {
+    background-color: var(--Yellow-300-self-care);
+}
+
+.self-care-card .card-top {
+    background-image: url('images/icon-self-care.svg');
+}
+
+@media (min-width: 768px) {
+    .dashboard-container {
+        grid-template-columns: 250px repeat(3, 1fr);
+        max-width: 1100px;
+    }
+
+    .profile-card {
+        grid-row: span 2;
+    }
+
+    .profile-card .top {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding-bottom: 5rem;
+    }
+    
+    .profile-card .top .name {
+        font-size: 2.5rem;
+    }
+
+    .profile-card .bottom .time-list {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .card .card-bottom .time {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: .5rem;
+    }
+}

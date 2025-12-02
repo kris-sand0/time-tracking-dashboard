@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  
+  <link rel="stylesheet" href="style.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+
+  <title>Frontend Mentor | Social proof section</title>
+</head>
+<body>
+  <div id="dashboard-container" class="dashboard-container">
+    <div class="profile-card">
+      <div class="top">
+        
+          <img src="./images/image-jeremy.png" alt="">
+          <div class="account-name">
+            <p class="small-text">Report for <br> <span class="name">Jeremy Robson</span></p>
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="time-list">
+      <button id="daily">Daily</button>
+      <button id="weekly" class="active">Weekly</button>
+      <button id="monthly">Monthly</button>
+    </div>
+  </div>
+
+  <script>
+    const dashboardContainer = document.getElementById('dashboard-container');
+    const timeframeBtns = document.querySelectorAll('.time-list button');
+    let statsData = []
+    let selectedTimeframe = 'weekly'
+
+    async function fetchData() {
+      const response = await fetch('./data.json')
+      statsData = await response.json()
+      displayData(selectedTimeframe)
+      
+    }
+
+    fetchData()
+
+    function displayData(timeframe) {
+      dashboardContainer.querySelectorAll('.card').forEach(card => card.remove())
+
+      statsData.forEach(stat => {
+        const item = document.createElement('div')
+        item.classList.add('card', `${stat.title.toLowerCase().replace(' ', '-')}-card`)
+
+        // get timeframe data
+
+        const timeData = stat.timeframes[timeframe]
+        const previousLabel = timeframe === 'daily' ? 'Yesterday' : timeframe === 'weekly' ? 'Last Week' : 'Last Month'
+
+        item.innerHTML = `
+          <div class="card-top">
+            
+          </div>
+          <div class="card-bottom">
+            <div class='card-header'>
+              <p class='title bold-text'>${stat.title}</p>
+              <div class='menu-btn'><i class='ri-more-fill'></i></div>
+            </div>
+            <div class='time'>
+              <p class='current-hours big-text'>${timeData.current}hrs</p>
+              <p class='previous-hours small-text'>${previousLabel} - <span class="previous-hours">${timeData.previous}</span>hrs</p>
+          </div>
+        `
+
+        dashboardContainer.appendChild(item)
+
+      })
+    }
+
+    timeframeBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        timeframeBtns.forEach(b => b.classList.remove('active'))
+        btn.classList.add('active')
+        selectedTimeframe = btn.id
+        displayData(selectedTimeframe)
+      })
+    })
+  </script>
+</body>
+</html>
